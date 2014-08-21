@@ -1,3 +1,9 @@
 .numberlist {
   display: inline;
 }
+
+.inline0 {
+  display: inline;
+  /*display:;*/
+}
+

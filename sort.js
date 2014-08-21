@@ -7,7 +7,8 @@
 //   $group1.push(parseInt($(this).text()))
 // })
 
-startArray = [1, 5, 3, 4, 2, 6, 7]
+startArray = [1, 5, 3, 4, 2, 6, 7];
+counter = 0;
 
 function mergeSort(arr) {
 
@@ -20,17 +21,20 @@ function mergeSort(arr) {
   var right = arr.slice(middle, arr.length);
 
   console.log("left [" + left + "]");
-  $('div').append('<p>'+ "left [" + left + "]" + '</p>');
-  // document.write(left + " ")
+  $('.start:last-child').append('<div class="inline' + counter + '">'+ "left [" + left + "]" + '</div>');
+  // $('<div class="inline' + counter + '">'+ "left [" + left + "]" + '</div>').insertAfter('.start');
 
   console.log("right [" + right + "]");
-  $('div').append('<p>'+ "right [" + right + "]" + '</p>');
-  // document.write(right + " ")
+  $('.start:last-child').append('<div class="inline' + counter + '">' + "right [" + right + "]" + '</div>');
+  // $('<div class="inline' + counter + '">' + "right [" + right + "]" + '</div>').after(".start")
+
+  counter = counter + 1;
 
   merged = merge(mergeSort(left), mergeSort(right));
-  // console.log("mergeSort(left) " + mergeSort(left));
-  // console.log("mergeSort(right)" + mergeSort(right));
   console.log("mergeSort " + merged);
+  $('.start:last-child').append('<div>'+ "mergeSort " + merged + '</div>');
+
+
   return merged;
 }
 
@@ -44,10 +48,12 @@ function merge(left, right) {
     if (left[0] < right[0]) {
       result.push(left.shift());
       console.log("Right is Bigger, push Left " + result)
+      $('.start:last-child').append('<div>'+ "Right is Bigger, push Left [" + result + "]" + '</div>');
     }
     else {
       result.push(right.shift());
       console.log("Left is Bigger, push Right " + result)
+      $('.start:last-child').append('<div>'+ "Left is Bigger, push Right [" + result + "]" + '</div>');
     }
   }
 
@@ -58,8 +64,9 @@ function merge(left, right) {
     result.push(right.shift());
 
   console.log("merge " + result)
+  $('.start:last-child').append('<div>' + "merge " + result + '</div')
   return result;
 }
 
-$('div').append('<div>' + startArray + '</div>')
+$('div').append('<div class="start">' + startArray + '</div>')
 mergeSort(startArray)
