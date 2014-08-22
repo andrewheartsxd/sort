@@ -1,4 +1,4 @@
-startArray = [1, 5, 3, 4, 2, 6, 7];
+startArray = [1, 5, 3, 4, 2, 6, 7, 4, 9, 1, 3];
 counter = 1;
 
 function mergeSort(arr, depth) {
@@ -12,73 +12,45 @@ function mergeSort(arr, depth) {
 
   console.log("left [" + left + "]");
   console.log("right [" + right  + "]");
-
-  // if(left.length > 1 && right.length > 1) {
-
-  //   $('#tr' + counter).append('<td>' + '[' + left + ']' + '</td>');
-  //   $('#tr' + counter).append('<td>' + '[' + right + ']' + '</td>');
-  // }
-  // else if(left.length === 1 && right.length >1) {
-
-  //   $('#tr' + counter).append('<td>' + '[' + left + ']' + '</td>');
-  //   $('#tr' + counter).append('<td>' + '[' + right + ']' + '</td>');
-  // }
-  // else if(left.length === 1 && right.length === 1) {
-  //   $('#tr' + counter).append('<td>' + '[' + left + ']' + '</td>');
-  //   $('#tr' + counter).append('<td>' + '[' + right + ']' + '</td>');
-  // }
-
+  console.log(depth);
 
   $('#tr' + depth).append('<td>' + '[' + left + ']' + '</td><td>' + '[' + right + ']' + '</td>');
 
-  // $('tbody:last-child').append('<td>' '[' + left + ']' + '</td>')
-
-  // $('tbody:last-child').append('<tr><td>' + '[' + left + ']' + '</td></tr>');
-  // $('tbody:last-child').append('<tr><td>' + '[' + right + ']' + '</td></tr>');
-
-  // if(left.length === 1 && right.length ===1) {
-  //   counter = counter + 1
-  //   $('tbody:last-child').append('<tr><td>' + '[' + left + ']' + '</td><td>' + '[' + right + ']' + '</td></tr>');
-  // }
-  // else {
-  //  $('tbody:last-child').append('<tr><td>' + '[' + left + ']' + '</td><td>' + '[' + right + ']' + '</td></tr>');
-  // }
-
-  merged = merge(mergeSort(left, depth + 1 ), mergeSort(right, depth + 1 ), depth - midRow);
+  merged = merge(mergeSort(left, depth + 1 ), mergeSort(right, depth + 1 ), noOfRows - depth + 1);
 
   return merged;
 }
 
-function merge(left, right, depth) {
+function merge(left, right, rowNumber) {
+
 
   var result = [];
 
   while (left.length && right.length) {
-    console.log("left [" + left + "]");
-    console.log("right [" + right + "]");
     if (left[0] < right[0]) {
       result.push(left.shift());
       console.log("Right is Bigger, push Left " + result);
-      // $('#table1:last-child').append('<tr>'+ "Right is Bigger, push Left [" + result + "]" + '</tr>');
     }
     else {
       result.push(right.shift());
       console.log("Left is Bigger, push Right " + result);
-      // $('#table1:last-child').append('<tr>'+ "Left is Bigger, push Right [" + result + "]" + '</tr>');
     }
   }
 
-  while(left.length)
+  while(left.length) {
     result.push(left.shift());
+  }
 
-  while(right.length)
+  while(right.length) {
     result.push(right.shift());
+  }
 
-  console.log("merge " + result);
-  $('#tr' + depth).append('<td>' + '[' + left + ']' + '</td><td>' + '[' + right + ']' + '</td>');
+
+  $('#tr' + rowNumber).append('<td>' + '[' + result + ']' + '</td>');
 
   return result;
 }
+
 
 
 
